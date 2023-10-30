@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:todo_app/login/login&Signup.dart';
 import 'package:todo_app/my_theme_data.dart';
 import 'package:todo_app/network/firebase/firebase_manger.dart';
+import 'package:todo_app/provider/my_provider.dart';
 
 class signUp_view extends StatelessWidget {
  var _formKey=GlobalKey<FormState>();
@@ -10,6 +12,8 @@ class signUp_view extends StatelessWidget {
  var nameController=TextEditingController();
   @override
   Widget build(BuildContext context) {
+    var provider=Provider.of<myProvider>(context);
+
     return Padding(
       padding: const EdgeInsets.all(20.0),
       child: Form(
@@ -18,8 +22,23 @@ class signUp_view extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             TextFormField(
+              style: TextStyle(
+                fontSize: 20,
+                color:Theme.of(context).colorScheme.primary,
+              ),
               controller: nameController,
-              decoration: const InputDecoration(labelText: 'Name'),
+              decoration: InputDecoration(labelText: 'Name',
+                  labelStyle:TextStyle(
+                    fontSize: 20,
+                    color:Theme.of(context).colorScheme.secondary,
+                  ),
+                enabledBorder: UnderlineInputBorder(
+                  borderSide: BorderSide(color: my_theme_data.primarywhite),
+                ),
+                focusedBorder: UnderlineInputBorder(
+                  borderSide: BorderSide(color:my_theme_data.primaryblue),
+                ),
+              ),
               validator: (value) {
                 if (value == null || value.isEmpty) {
                   return 'Please enter your name';
@@ -29,8 +48,24 @@ class signUp_view extends StatelessWidget {
               },
             ),
             TextFormField(
+              style: TextStyle(
+                fontSize: 20,
+                color:Theme.of(context).colorScheme.primary,
+              ),
               controller: emailController,
-              decoration: const InputDecoration(labelText: 'Email'),
+              decoration: InputDecoration(labelText: 'Email',
+              labelStyle:TextStyle(
+                fontSize: 20,
+                color:Theme.of(context).colorScheme.secondary,
+              ),
+                enabledBorder: UnderlineInputBorder(
+                  borderSide: BorderSide(color: my_theme_data.primarywhite),
+                ),
+                focusedBorder: UnderlineInputBorder(
+                  borderSide: BorderSide(color:my_theme_data.primaryblue),
+                ),
+
+              ),
               validator: (value) {
                 if (value == null || value.isEmpty) {
                   return 'Please enter your email';
@@ -45,9 +80,24 @@ class signUp_view extends StatelessWidget {
               },
             ),
             TextFormField(
+              style: TextStyle(
+                fontSize: 20,
+                color:Theme.of(context).colorScheme.primary,
+              ),
               controller: passwordController,
               obscureText: true,
-              decoration: const InputDecoration(labelText: 'Password'),
+              decoration: InputDecoration(labelText: 'Password',
+                  labelStyle:TextStyle(
+                    fontSize: 20,
+                    color:Theme.of(context).colorScheme.secondary,
+                  ),
+                enabledBorder: UnderlineInputBorder(
+                  borderSide: BorderSide(color: my_theme_data.primarywhite),
+                ),
+                focusedBorder: UnderlineInputBorder(
+                  borderSide: BorderSide(color:my_theme_data.primaryblue),
+                ),
+              ),
               validator: (value) {
                 if (value == null || value.isEmpty) {
                   return 'Please enter your password';

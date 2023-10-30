@@ -16,7 +16,7 @@ class taskItem extends StatelessWidget {
           padding: EdgeInsets.all(0),
           margin: EdgeInsets.all(15),
           decoration: BoxDecoration(
-            color: my_theme_data.primarywhite,
+            color: Theme.of(context).colorScheme.primaryContainer,
             borderRadius: BorderRadius.circular(15),
           ),
           child: Slidable(
@@ -68,11 +68,18 @@ class taskItem extends StatelessWidget {
                         ),
                         Text(task.description, style:
                         TextStyle(
-                            color: my_theme_data.primaryblack,
+                            color:Theme.of(context).colorScheme.secondary,
                             fontSize: 20,
                             fontWeight: FontWeight.w600
                         )),
-                        Icon(Icons.access_time,size: 20,)
+                        Row(children:[
+                          Icon(Icons.access_time,size: 20,
+                            color:Theme.of(context).colorScheme.secondary,),
+                          Text(task.date.toString().substring(0,10),
+                            style: TextStyle(
+                            color:Theme.of(context).colorScheme.secondary,
+                          ),)
+                        ] )
                       ],
                     ),
                   ),
@@ -81,12 +88,13 @@ class taskItem extends StatelessWidget {
                       firebaseManager.updatetask(task.id,true);
                     },
                     child: Container(
-                      margin: EdgeInsets.only(left: 10,right: 10),
+                      margin: EdgeInsets.only(left: 0,right: 10),
                       padding: EdgeInsets.symmetric(vertical: 10,horizontal: 20),
-                      child: task.isDone?Text("Done!",style: TextStyle(fontSize: 15,fontWeight: FontWeight.bold,color: Colors.white),)
+                      child: task.isDone?Text("Done!",
+                        style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,color: Colors.white),)
                           :Icon(Icons.done,
                         color: my_theme_data.primarywhite,
-                        size: 20,),
+                        size: 25,),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(15),
                         color:task.isDone?Colors.green: my_theme_data.primaryblue,
