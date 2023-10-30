@@ -42,57 +42,61 @@ static Future<void> updatetask(String taskId,bool isDone){
     return getTaskCollection().doc(taskId).update({"isDone":isDone});
 }
 
+static Future<void> editTask(taskModel task) async{
+   await getTaskCollection().doc(task.id).update(task.toJson());
 
-static Future<void> createAccount(
-    String name,String email,String password,Function onSuccess,Function onError)async{
-  try {
-    final credential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
-      email: email,
-      password: password,
-    );
-    // credential.user!.sendEmailVerification();
-    userModel user=userModel(name: name, email: email, userid:credential.user!.uid);
-    addUserToFirestore(user);
-    onSuccess();
-  } on FirebaseAuthException catch (e) {
-    if (e.code == 'weak-password') {
-      onError(e.message);
-    } else if (e.code == 'email-already-in-use') {
-      onError(e.message);
-    }
-  } catch (e) {
-    print(e);
   }
-}
 
-static Future<void> login(String email,String password,Function onSuccess,Function onError)async{
-  try {
-    final credential = await FirebaseAuth.instance.signInWithEmailAndPassword(
-        email: email,
-        password: password
-    );
-    onSuccess();
-    // if(credential.user!.emailVerified){
-    //   onSuccess();
-    // }else{
-    //   onError("please veryfiy your mail");
-    // }
 
-    // credential.user.emailVerified;
-  } on FirebaseAuthException catch (e) {
-    onError(e.message);
-    // if (e.code == 'user-not-found') {
-    //   print('No user found for that email.');
-    // } else if (e.code == 'wrong-password') {
-    //   print('Wrong password provided for that user.');
-    // }
-  }
-}
 
 
 // -------------------------------user----------------------------------
 
+  static Future<void> createAccount(
+      String name,String email,String password,Function onSuccess,Function onError)async{
+    try {
+      final credential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+      // credential.user!.sendEmailVerification();
+      userModel user=userModel(name: name, email: email, userid:credential.user!.uid);
+      addUserToFirestore(user);
+      onSuccess();
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'weak-password') {
+        onError(e.message);
+      } else if (e.code == 'email-already-in-use') {
+        onError(e.message);
+      }
+    } catch (e) {
+      print(e);
+    }
+  }
 
+  static Future<void> login(String email,String password,Function onSuccess,Function onError)async{
+    try {
+      final credential = await FirebaseAuth.instance.signInWithEmailAndPassword(
+          email: email,
+          password: password
+      );
+      onSuccess();
+      // if(credential.user!.emailVerified){
+      //   onSuccess();
+      // }else{
+      //   onError("please veryfiy your mail");
+      // }
+
+      // credential.user.emailVerified;
+    } on FirebaseAuthException catch (e) {
+      onError(e.message);
+      // if (e.code == 'user-not-found') {
+      //   print('No user found for that email.');
+      // } else if (e.code == 'wrong-password') {
+      //   print('Wrong password provided for that user.');
+      // }
+    }
+  }
   static CollectionReference<userModel> getuserCollection(){
     return FirebaseFirestore.instance.collection("user")
         .withConverter<userModel>(

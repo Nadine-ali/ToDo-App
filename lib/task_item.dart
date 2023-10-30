@@ -3,6 +3,7 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:todo_app/models/task_model.dart';
 import 'package:todo_app/my_theme_data.dart';
 import 'package:todo_app/network/firebase/firebase_manger.dart';
+import 'package:todo_app/screens/editTask_screen.dart';
 
 class taskItem extends StatelessWidget {
   taskModel task;
@@ -31,9 +32,17 @@ class taskItem extends StatelessWidget {
                   label: "delete",
                   icon: Icons.delete,
                   borderRadius: BorderRadius.only(topLeft: Radius.circular(15),bottomLeft: Radius.circular(15)),
+                ),
+                SlidableAction(onPressed:(context) {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => editTask(task:task),));
+                },
+                  backgroundColor: Colors.blue,
+                  label: "Edit",
+                  icon: Icons.edit,
+                  borderRadius: BorderRadius.only(topLeft: Radius.circular(0),bottomLeft: Radius.circular(0)),
+                ),
 
-
-                )
               ],
             ),
             child: Padding(
@@ -72,14 +81,14 @@ class taskItem extends StatelessWidget {
                             fontSize: 20,
                             fontWeight: FontWeight.w600
                         )),
-                        Row(children:[
-                          Icon(Icons.access_time,size: 20,
-                            color:Theme.of(context).colorScheme.secondary,),
-                          Text(task.date.toString().substring(0,10),
-                            style: TextStyle(
-                            color:Theme.of(context).colorScheme.secondary,
-                          ),)
-                        ] )
+                        // Row(children:[
+                        //   Icon(Icons.access_time,size: 20,
+                        //     color:Theme.of(context).colorScheme.secondary,),
+                        //   Text(task.date.toString(),
+                        //     style: TextStyle(
+                        //     color:Theme.of(context).colorScheme.secondary,
+                        //   ),)
+                        // ] )
                       ],
                     ),
                   ),

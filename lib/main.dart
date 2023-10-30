@@ -9,6 +9,7 @@ import 'package:todo_app/layout/home_layout.dart';
 import 'package:todo_app/login/login&Signup.dart';
 import 'package:todo_app/my_theme_data.dart';
 import 'package:todo_app/provider/my_provider.dart';
+import 'package:todo_app/screens/editTask_screen.dart';
 import 'package:todo_app/screens/settings_tab.dart';
 import 'package:todo_app/screens/splash_screen.dart';
 
@@ -39,6 +40,7 @@ class myApp extends StatelessWidget {
         home_layout.RouteName:(context)=>home_layout(),
         login_screen.RouteName:(context)=>login_screen(),
         settings_tab.RouteName:(context)=>settings_tab(),
+        // editTask.RouteName:(context) => editTask(),
       },
       theme: my_theme_data.lightTheme,
       darkTheme: my_theme_data.darkTheme,
